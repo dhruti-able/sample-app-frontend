@@ -1,0 +1,9 @@
+{
+    "routes": [{
+        "name": "About",
+        "url": "/" 
+    }, {
+        "name": "Feedback",
+        "url": "/feedback/" 
+    }]
+}
