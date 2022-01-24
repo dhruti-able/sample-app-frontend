@@ -3,6 +3,7 @@ import sortBy from 'lodash/sortBy'
 import { reviewsApi } from './api.js';
     
 export const loading = writable(false);
+export const sortByStore = writable('name');
 const reviews = writable([]);
 
 const customStore = {
@@ -42,5 +43,4 @@ const customStore = {
 }
 
 export default customStore;
-export const nameSorted = derived(reviews, (reviews) => sortBy(reviews, 'name'));
-export const timeSorted = derived(reviews, (reviews) => sortBy(reviews, 'created_at'))
+export const sortedStore = derived([reviews, sortByStore], (values) => sortBy(values[0], values[1]));
