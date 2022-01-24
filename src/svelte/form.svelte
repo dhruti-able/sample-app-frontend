@@ -18,7 +18,6 @@
         // validations
         validateForm();
 
-        $loading = true;
         await customStore.addReview(JSON.stringify({
             id: uuidv4(),
             name: name,
@@ -26,7 +25,6 @@
             review: review,
             created_at: moment().format('YYYY-MM-DD HH:mm:ss')
         }));
-        $loading = false;
     }
 </script>
 

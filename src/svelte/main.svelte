@@ -13,7 +13,6 @@
 
     onMount(async () => {
         await customStore.getReviews();
-        $loading = false;
     })   
 </script>
 
