@@ -1,6 +1,6 @@
 <script>
-    import { reviewsApi } from './api.js';
-    import { loading, reviews } from './store.js'
+    import { loading } from './store.js'
+    import customStore from './store';
     import moment from 'moment';
     import { v4 as uuidv4 } from 'uuid';
        
@@ -19,19 +19,14 @@
         validateForm();
 
         $loading = true;
-        // save the response
-        const response = await reviewsApi('POST', {
+        await customStore.addReview(JSON.stringify({
             id: uuidv4(),
             name: name,
             email: email,
             review: review,
             created_at: moment().format('YYYY-MM-DD HH:mm:ss')
-		})
-   
-        if(response) {
-            $reviews = [...$reviews, response];
-            $loading = false;
-        }
+        }));
+        $loading = false;
     }
 </script>
 

@@ -4,28 +4,16 @@
     import Review from './review.svelte';
     import FeedbackForm from './form.svelte';
     
-    import { loading, reviews, nameSorted, timeSorted } from './store.js'
-    import { reviewsApi } from './api.js';
-    
+    import { loading, nameSorted, timeSorted } from './store.js'
+    import customStore from './store';
+
     console.log("Main svelte component");
 
     let sortBy = 'name';
 
     onMount(async () => {
-        const existingEntries = new Set($reviews.map((e) => {
-            return e.id;
-        }));
-
-        let response = await reviewsApi('GET', null);
-        if(response && response.length) {
-            // filter the existing data
-            response = response.filter((e) => {
-                return !existingEntries.has(e.id);
-            })
-
-            $reviews = [...$reviews, ...response];
-            $loading = false;
-        }
+        await customStore.getReviews();
+        $loading = false;
     })   
 </script>
 
